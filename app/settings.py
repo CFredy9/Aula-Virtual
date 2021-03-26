@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'api',
     'mptt',
     'django.contrib.sites',
-    'djcelery',
+    #'djcelery',
     'debug_toolbar',
 ]
 
@@ -143,7 +143,7 @@ MEDIA_URL = '/media/'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guatemala'
 
 USE_I18N = True
 
@@ -162,3 +162,11 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'danicalderon628@gmail.com'
+EMAIL_HOST_PASSWORD = 'calderonguillen7'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

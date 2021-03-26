@@ -13,10 +13,12 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    rol = models.ForeignKey('Rol', on_delete=models.CASCADE, related_name="rol", null=True, blank=True)   
     avatar = models.ImageField(upload_to='Avatar', null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
     gender = models.PositiveSmallIntegerField(choices=GENDERS, null=True, blank=True)
+    inicio_sesion = models.BooleanField(default=False)    
 
     activo = models.BooleanField(default=True)
     creado = models.DateTimeField(auto_now_add=True)
@@ -31,4 +33,4 @@ class Profile(models.Model):
         user.save()
         self.active = False
         self.save()
-        return True
+        return True 

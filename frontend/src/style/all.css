@@ -507,7 +507,7 @@
     border: none;
     cursor: pointer;
     display: inline-block;
-    float: left;
+    /*float: left;*/
     height: 24px;
     padding: 3px 5px;
     width: 28px
@@ -709,7 +709,7 @@
 .ql-snow .ql-picker {
     color: #444;
     display: inline-block;
-    float: left;
+    /*float: left;*/
     font-size: 14px;
     font-weight: 500;
     height: 24px;
@@ -3061,7 +3061,6 @@ select.form-control[multiple], select.form-control[size], textarea.form-control 
     width: 100%;
     margin-top: .25rem;
     font-size: 80%;
-    color: #dc3545
 }
 
 .invalid-tooltip {
@@ -3143,7 +3142,7 @@ select.form-control[multiple], select.form-control[size], textarea.form-control 
 }
 
 .custom-control-input.is-invalid:focus ~ .custom-control-label:before, .was-validated .custom-control-input:invalid:focus ~ .custom-control-label:before {
-    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25)
+    box-shadow: 0 0 0 .2rem rgba(226, 11, 32, 0.25)
 }
 
 .custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label:before, .custom-file-input.is-invalid ~ .custom-file-label, .was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label:before, .was-validated .custom-file-input:invalid ~ .custom-file-label {
@@ -4890,7 +4889,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     flex-direction: column;
     padding-left: 0;
     margin-bottom: 0;
-    list-style: none
+    list-style: none;
 }
 
 .navbar-nav .nav-link {
@@ -5207,6 +5206,12 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .navbar-dark .navbar-text a, .navbar-dark .navbar-text a:focus, .navbar-dark .navbar-text a:hover {
     color: #fff
 }
+
+.login {
+    background-color: rgb(10, 12, 148);
+    height: 637px;
+}
+
 
 .card {
     position: relative;
@@ -8439,8 +8444,50 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     box-shadow: none !important
 }
 
+
+
+
+
+/* FORMULARIOS DEL PROYECTO.----------------------------------------------------------------- */
+
+.formulario {
+    margin: 0 auto;
+    align-content: center;
+    transform: translate(0,45%);
+    /*border-radius: 10px;
+    border: 1px solid #666666;*/
+    width: 30%;
+}
+
+.formulario2 {
+    margin: 0 auto;
+    align-content: center;
+    transform: translate(0,25%);
+    /*border-radius: 10px;
+    border: 1px solid #666666;*/
+    width: 30%;
+}
+
+.formulario3 {
+    margin: 0 auto;
+    align-content: center;
+    transform: translate(0,5%);
+    /*border-radius: 10px;
+    border: 1px solid #666666;*/
+    width: 30%;
+}
+
+.formulario4 {
+    margin: 0 auto;
+    align-content: center;
+    transform: translate(0,0);
+    /*border-radius: 10px;
+    border: 1px solid #666666;*/
+    width: 50%;
+}
+
 .w-25 {
-    width: 25% !important
+    width: 25% !important;
 }
 
 .w-50 {

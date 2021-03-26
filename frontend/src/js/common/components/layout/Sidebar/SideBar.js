@@ -1,42 +1,188 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from "react-router-dom";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import '../../../../../assets/styles/Sidebar.css'
 
 class SideBar extends Component {
     constructor(props) {
         super(props);
+        this.state = {dropdownOpen: false};
     }
-
+    toggle = () => {
+        this.setState({dropdownOpen: !this.state.dropdownOpen});
+    };
     render() {
-        const { toggleOpen, navToggle, logOut } = this.props;
+        const { toggleOpen, navToggle,  logOut, user } = this.props;
         return (
-            <aside className={`main-sidebar px-0 col-12 col-md-3 col-lg-2 ${toggleOpen?'':'open'}`}>
+            <aside className={`main-sidebar px-0 col-lg-2 ${toggleOpen?'':'open'}`}>
                 <div className="main-navbar">
+                
                     <nav
-                        className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0 navbar navbar-light">
-                        <a  href="#" className="w-100 mr-0 navbar-brand" >
-                            <div className="d-table m-auto">
-                                <img id="main-logo"
-                                    className="d-inline-block align-top mr-1"
-                                    src={require('assets/img/logo.png')}
-                                    alt="Logo" />
-                            </div>
-                        </a>
-                        <a  className="toggle-sidebar d-sm-inline d-md-none d-lg-none"
+                        className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0 navbar nav-item">
+                       
+                        <a  className="toggle-sidebar d-md-none d-lg-none"
                             onClick={navToggle}>
                             <i className="material-icons"></i>
                         </a>
+                        
                     </nav>
                 </div>
                 <div className="nav-wrapper">
                     <ul className="nav--no-borders flex-column nav">
+                    
                         <li className="nav-item">
-                            <NavLink to="/" exact className="nav-link " activeClassName={'active'}>
+                            <NavLink to="/" exact className="nav-link" activeClassName={'active'}>
                                 <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">edit</i>
+                                    <i className="material-icons">home</i>
                                 </div>
-                                <span>Home</span>
+                                <span className="text-light font-weight-bold mb-0">Home</span>
                             </NavLink>
                         </li>
+                       
+                        <li>
+                        <nav className="nav-item">
+                            <Dropdown className="dropdown-menu-small" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                <DropdownToggle color="red" caret className="nav--no-borders flex-column nav">
+                                <li  exact className="nav-link " activeClassName={'active'}>
+                                        <div className="d-inline-block item-icon-wrapper">
+                                            <i className="material-icons">reorder</i>
+                                        </div>
+                                        <span>Registro</span>
+                                    </li>
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/catedratico" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">account_circle</i>
+                                            </div>
+                                            <span>Catedratico</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+
+                                <Dropdown>
+                                    <li className="nav-item">
+                                        <NavLink to="/estudiante" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">account_circle</i>
+                                            </div>
+                                            <span>Estudiante</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/ciclo_escolar" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">content_paste</i>
+                                            </div>
+                                            <span>Ciclo Escolar</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/nivel" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">content_paste</i>
+                                            </div>
+                                            <span>Nivel</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/grado" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">content_paste</i>
+                                            </div>
+                                            <span>Grado</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/seccion" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">content_paste</i>
+                                            </div>
+                                            <span>Seccion</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/curso" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">assignment</i>
+                                            </div>
+                                            <span>Curso</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+                                <Dropdown >
+                                    <li className="nav-item">
+                                        <NavLink to="/profesion" exact className="nav-link " activeClassName={'active'}>
+                                            <div className="d-inline-block item-icon-wrapper">
+                                                <i className="material-icons">work</i>
+                                            </div>
+                                            <span>Profesión</span>
+                                        </NavLink>
+                                    </li>
+                                </Dropdown>
+                                
+                                </DropdownMenu>
+                            </Dropdown>
+                        <nav className="nav">
+                            <a  className="nav-link nav-link-icon toggle-sidebar d-sm-inline d-md-inline d-lg-none text-center"
+                                onClick={ navToggle } >
+                                <i className="material-icons"></i>
+                            </a>
+                        </nav>
+                    </nav>
+                </li> 
+                <li className="nav-item">
+                            <NavLink to="/asignacion_curso" className="nav-link" activeClassName={'active'}>
+                                <div className="d-inline-block item-icon-wrapper">
+                                    <i className="material-icons">vertical_split</i>
+                                </div>
+                                <span>Asignación Curso</span>
+                            </NavLink>
+                 </li>
+
+                 <li className="nav-item">
+                            <NavLink to="/estadisticas" className="nav-link" activeClassName={'active'}>
+                                <div className="d-inline-block item-icon-wrapper">
+                                    <i className="material-icons">vertical_split</i>
+                                </div>
+                                <span>Estadisticas</span>
+                            </NavLink>
+                 </li>
+                {/*  <li className="nav-item">
+                            <NavLink to="/miscursos" className="nav-link" activeClassName={'active'}>
+                                <div className="d-inline-block item-icon-wrapper">
+                                    <i className="material-icons">vertical_split</i>
+                                </div>
+                                <span>Mis Cursos</span>
+                            </NavLink>
+                 </li> 
+
+                 <li className="nav-item">
+                            <NavLink to="/miscursosest" className="nav-link" activeClassName={'active'}>
+                                <div className="d-inline-block item-icon-wrapper">
+                                    <i className="material-icons">vertical_split</i>
+                                </div>
+                                <span>Cursos Asignados</span>
+                            </NavLink>
+                 </li> */}
+               
+                {/* 
                         <li className="nav-item">
                             <NavLink to="/page2" className="nav-link" activeClassName={'active'}>
                                 <div className="d-inline-block item-icon-wrapper">
@@ -77,6 +223,7 @@ class SideBar extends Component {
                                 <span>Log Out</span>
                             </Link>
                         </li>
+                     */} 
                     </ul>
                 </div>
             </aside>

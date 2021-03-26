@@ -10,6 +10,8 @@ const genders = [
 
 const ProfileForm = (props) => {
     const { handleSubmit, me, setAvatar } = props;
+    console.log("PROPS ", me)
+    console.log("AVATAR ", setAvatar)
     return (
             <form action="" onSubmit={handleSubmit} className="py-4">
                 <h2>PERFIL</h2>
@@ -18,7 +20,11 @@ const ProfileForm = (props) => {
                     <div className="p-0 pt-3 d-flex flex-column flex-md-row">
                         <div className="form-group has-feedback flex-1 mx-3">
                             <label htmlFor="avatar">Avatar</label>
-                            <Field photo={me.profile && me.profile.avatar ? me.profile.avatar : null} setFile={setAvatar} name="avatar" component={renderFilePicker} />
+                            <Field 
+                            photo={me.profile && me.profile.avatar ? me.profile.avatar : null} 
+                            setFile={setAvatar} 
+                            name="avatar" 
+                            component={renderFilePicker} />
                         </div>
                         <div className="d-flex flex-column flex-1 mx-3">
                             <div className="form-group has-feedback">
@@ -34,6 +40,10 @@ const ProfileForm = (props) => {
                             <div className="form-group has-feedback">
                                 <label htmlFor="last_name">Apellido</label>
                                 <Field name="last_name" placeholder="Nombre" component={renderField} type="text" className="form-control" />
+                            </div>
+                            <div className="form-group has-feedback">
+                                <label htmlFor="last_name">Email</label>
+                                <Field name="email" placeholder="Email" component={renderField} type="text" className="form-control" />
                             </div>
                         </div>
                     </div>

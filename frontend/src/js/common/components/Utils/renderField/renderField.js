@@ -10,7 +10,7 @@ import _ from "lodash";
 
 
 export const renderField = ({
-                                input, placeholder, type, meta: { touched, error },
+                                input, placeholder, someValue, type, meta: { touched, error }, disabled=false,
                             }) => {
     const invalid = touched && error;
     return (
@@ -19,6 +19,8 @@ export const renderField = ({
                 {...input}
                 placeholder={placeholder}
                 type={type}
+                disabled={disabled}
+                defaultValue={someValue}
                 className={classNames('form-control', { 'is-invalid': invalid })}
             />
             {invalid && (
@@ -31,7 +33,7 @@ export const renderField = ({
 };
 
 export const renderTextArea = ({
-                                   input, placeholder, rows, meta: { touched, error },
+                                   input, placeholder, rows, disabled, meta: { touched, error },
                                }) => {
     const invalid = touched && error;
     return (
@@ -39,6 +41,7 @@ export const renderTextArea = ({
       <textarea
           {...input}
           placeholder={placeholder}
+          disabled={disabled}
           style={{ resize: 'none' }}
           rows={rows || 3}
           className={classNames('form-control', { 'is-invalid': invalid })}
@@ -53,13 +56,14 @@ export const renderTextArea = ({
 };
 
 export const renderNumber = ({
-                                 input, decimalScale, placeholder, meta: { touched, error }, prefix="", suffix="", numberFormat,
+                                 input, decimalScale, placeholder, meta: { touched, error }, prefix="", suffix="", numberFormat, disabled,
                              }) => {
     const invalid = touched && error;
     return (
         <div>
             <NumberFormat
                 placeholder={placeholder}
+                disabled={disabled}
                 className={classNames('form-control', { 'is-invalid': invalid })}
                 decimalScale={decimalScale || 0}
                 format={numberFormat}
@@ -192,6 +196,8 @@ export const SelectField = (
         isClearable,
         isMulti,
         isSearchable,
+        defaultValue,
+        defaultOptions,
         options,
         placeholder,
         labelKey="label",
@@ -221,6 +227,8 @@ export const SelectField = (
                 placeholder={placeholder}
                 onChange={(e) => { input.onChange(e ? e[valueKey] : null); }}
                 value={value}
+                defaultValue={defaultValue}
+                defaultOptions={defaultOptions}
                 isDisabled={disabled}
             />
             {invalid && (
@@ -241,17 +249,18 @@ export const AsyncSelectField = (
         isSearchable,
         loadOptions,
         placeholder,
+        defaultValue,
         meta: { touched, error }
     }) => {
 
     const invalid = touched && error;
-
+    
     return (
         <React.Fragment>
             <Async
                 isClearable={isClearable}
                 cacheOptions
-                className={classNames('react-select-container', { 'is-invalid': invalid })}
+                className={classNames('form-control', { 'is-invalid': invalid })}
                 backspaceRemovesValue={false}
                 isSearchable={isSearchable}
                 defaultOptions
@@ -259,6 +268,8 @@ export const AsyncSelectField = (
                 placeholder={placeholder}
                 onChange={(e) => { input.onChange(e ? e : null); }}
                 value={input.value}
+                label={input.label}
+                defaultValue={defaultValue}
                 isDisabled={disabled}
             />
             {invalid && (
@@ -368,7 +379,7 @@ export const renderDayPicker = ({className, disabled, maxDate, minDate, input, m
 export const renderDatePicker = ({className, disabled, maxDate, minDate, input, meta: { touched, error } }) => {
     const invalid = touched && error;
     return (
-        <div className={classNames(`${className}`, { 'is-invalid': invalid })}>
+        <div className={classNames(`form-control`, { 'is-invalid': invalid })}>
             <DatePicker
                 onChange={e => input.onChange(e)}
                 disabled={disabled}

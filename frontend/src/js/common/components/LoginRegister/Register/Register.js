@@ -14,7 +14,7 @@ class Registro extends Component {
     }
 
     render() {
-        const { onSubmit, loader } = this.props;
+        /*const { onSubmit, loader } = this.props;
         if (localStorage.getItem('token')) {
             return (<Redirect to="/" />);
         }
@@ -34,7 +34,13 @@ class Registro extends Component {
                         </LoadMask>
                     </div>
                 </div>
-            </div>
+            </div> 
+        );*/
+
+        const { onSubmit, me } = this.props;
+
+        return (
+            <RegisterForm onSubmit={onSubmit} me={me} />
         );
     }
 }

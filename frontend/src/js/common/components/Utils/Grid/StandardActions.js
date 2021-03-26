@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import './acciones.css';
 import Swal from 'sweetalert2';
+import { Field  } from 'redux-form';
+import { renderField } from '../../Utils/renderField/renderField';
 
 
 class Acciones extends Component {
@@ -28,13 +30,19 @@ class Acciones extends Component {
     };
 
     render() {
-        const { id, ver, editar, eliminar } = this.props;
+        const { id, ver, editar, eliminar, add } = this.props;
 
         return (
             <div className="d-flex justify-content-center">
                 {(ver !== undefined) && (
                     <Link to={`${ver}/${id}/`} className="px-2" ><i className="material-icons">remove_red_eye</i></Link>
                 )}
+                {(add !== undefined) && (
+                    <React.Fragment>
+                    <Link to={`${add}`} className="px-2" ><i className="material-icons">add_circle</i></Link>
+                    <button name='id' type="submit"/> 
+                    </React.Fragment>
+                    )}
                 {(editar !== undefined) && (
                     <Link className="text-warning" to={`${editar}/${id}/editar`} ><i className="material-icons">edit</i></Link>
                 )}
@@ -53,3 +61,5 @@ export function standardActions(acciones) {
         return ( <Acciones id={cell} {...acciones}/> )
     };
 }
+
+

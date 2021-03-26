@@ -54,7 +54,7 @@ export default class Grid extends Component {
                     <BootstrapTable
                         expandableRow={expandableRow}
                         expandComponent={expandComponent}
-                        trClassName={trClassName}
+                        trClassName='table'
                         cellEdit={cellEditProp}
                         data={loading ? [] : data.results}
                         afterSaveCell={afterSave}

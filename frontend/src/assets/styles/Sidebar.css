@@ -1,0 +1,62 @@
+.main-contenido {
+    width: 82%;
+    height: 520px;
+    padding: 0;
+    display:inline-block;
+    background-color: white;
+    border-left: outset;
+    margin-left: 230px;
+    margin-top: 0px;
+    grid-template-columns: 250px;
+    grid-template-rows: 100px;
+    
+}
+
+:root {
+    --primary: #111B54;
+    --light: #ffffff;
+    --grey: #efefef;
+}
+
+
+
+.main-navbar {
+    /*background-color: #111B54;*/ 
+    /*background-image: url('https://fondosmil.com/fondo/31309.jpg');*/
+    background-image: url('https://i.pinimg.com/originals/35/eb/7d/35eb7d5bce221d9392feb1e426ba48af.jpg');
+    
+}
+
+.nav-wrapper {
+    /*background-color:#111B54; */
+    /*background-color:#ffffff; */
+    background-image: url('https://i.pinimg.com/originals/35/eb/7d/35eb7d5bce221d9392feb1e426ba48af.jpg');
+    
+}
+
+.nav-item {
+    
+    background-image: url('https://i.pinimg.com/originals/35/eb/7d/35eb7d5bce221d9392feb1e426ba48af.jpg');
+    
+}
+.nav-link {
+    color:#ffffff;
+}
+.nav-link:hover {
+    color:rgb(11, 241, 192);
+}
+
+.main-footer {
+    height: 3.75rem;
+    background-image: url('https://i.pinimg.com/originals/35/eb/7d/35eb7d5bce221d9392feb1e426ba48af.jpg');
+    
+}
+
+.navbar-nav {
+    
+    background-color: rgb(97, 97, 99);
+}
+
+.nav-item-dropdown {
+    background-color: pink;
+}

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import LoginForm from './LoginForm';
-import './login.css';
+//import './login.css';
 import LoadMask from "Utils/LoadMask/LoadMask";
 
 class Login extends Component {
@@ -20,7 +20,7 @@ class Login extends Component {
             return (<Redirect to="/" />);
         }
         return (
-            <div className="blue-gradient-bg">
+            <div className="">
                 <div className="d-flex flex-column align-items-center pt-3 bienvenida">
                     <h1 className="text-center">Bienvenido a CianStarter</h1>
                     <p>Página de login</p>
@@ -31,7 +31,7 @@ class Login extends Component {
                         <h5 className="text-center pv">INGRESAR</h5>
                         <LoadMask loading={loader} light>
                             <LoginForm onSubmit={onSubmit} />
-                            <span>¿No tienes cuenta?&nbsp;<Link to="/registro">Registrate aquí</Link></span>
+                            <span className="span">¿Olvidaste tu contraseña?&nbsp;<Link to="/recuperacioncontraseña" className="link">Click Aquí</Link></span>
                         </LoadMask>
                     </div>
                 </div>

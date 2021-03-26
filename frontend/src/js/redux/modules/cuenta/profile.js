@@ -4,7 +4,7 @@ import { NotificationManager } from "react-notifications";
 import { api } from "api";
 import {setMe} from "./login";
 
-const LOADER = 'LOGIN_LOADER';
+const LOADER = 'LOGIN_LOADERS';
 
 export const constants = {
 };

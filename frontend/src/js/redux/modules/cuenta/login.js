@@ -33,10 +33,20 @@ export const setMe = me => ({
 export const onSubmit = (data = {}) => (dispatch, getStore) => {
     dispatch(setLoader(true));
     api.post('user/token', data).then((response) => {
-        localStorage.setItem('token', response.token);
-        dispatch(initializeForm('profile', response.user));
-        dispatch(setMe(response.user));
-        dispatch(push("/"));
+        console.log('RESPONSE', response);
+
+        if(response.user.profile.inicio_sesion == false && response.user.profile.rol != null) {
+            localStorage.setItem('token', response.token);
+            //dispatch(initializeForm('contraseña', response.user));
+            dispatch(setMe(response.user));
+            dispatch(push("/Contraseña"))
+        }
+        else {
+            localStorage.setItem('token', response.token);
+            dispatch(initializeForm('profile', response.user));
+            dispatch(setMe(response.user));
+            dispatch(push("/"));
+        }
     }).catch(() => {
         NotificationManager.error('Credenciales incorrectas, vuelva a intentar', 'ERROR', 0);
     }).finally(() => {
@@ -44,8 +54,19 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
     });
 };
 
+export const verifyInicioSesion = () => (dispatch) => {
+    api.get('/user/me').then(me => {
+        console.log('Login: ', me)
+        dispatch(initializeForm('profile', me));
+        dispatch(setMe(me));
+    })
+        .catch(() => {
+    }).finally(() => {});
+};
+
 export const getMe = () => (dispatch) => {
     api.get('/user/me').then(me => {
+        console.log('Login: ', me)
         dispatch(initializeForm('profile', me));
         dispatch(setMe(me));
     })

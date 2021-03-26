@@ -1,0 +1,195 @@
+Catedratico
+    nombre
+    apellido
+    profesion
+    activo 
+
+Contacto
+    nombre_contacto_1
+    telefono_contacto_1    
+    nombre_contacto_2
+    telefono_contacto_2
+
+Estudiante
+    nombre
+    apellido
+    carnet
+    edad
+    activo
+    asignacion / ManyToMany 
+    contacto / OneToOne
+
+Asignacion
+    ciclo / related_name="asignacion_ciclo"
+    grado / related_name="asignacion_grado"
+    seccion / related_name="asignacion_seccion"
+    curso / related_name="asignacion_curso"
+    catedratico / related_name="asignacion_catedratico"    
+
+Tarea
+    asignacion / related_name="tarea_asignacion"
+    estudiante / related_name="tarea_estudiante"
+    punteo
+    fecha_entrega
+    hora_entrega    
+
+EstudianteTarea
+    tarea  / related_name="estudiantetarea_tarea"
+    estudiante
+    calificacion / default=0 / default=null
+
+    estudiante = request.user.profile.estudiante
+    queryset = Estudiante.objects.annotate(
+        promedio = AVG('asignacion__tarea_asignacion__punteo'),
+        sumatoria = Count('asignacion__tarea_asignacion__punteo')
+    ).annotate(
+        operacion = F('promedio') * F('sumatoria') + F('edad')
+    ).annotate(
+        contacto = F('contacto__nombre_contacto_1)
+    ).filter(
+        promedio__gt=70,
+        asignacion__grado=grado
+    ).order_by('-promedio')[:10]
+
+    classEstudianteSerializer(...):
+    promedio = serializers.FloatField(default=0)
+    sumatoria = serializers.IntegerField(default=0)
+    operacion = serializers.FloatField(default=0)
+    contacto = serializers.CharField(default='')
+
+        class:
+            fields= '__all__'
+
+
+    -------------------------------------------------------------
+
+    estudiante = request.user.profile.estudiante
+    asginaciones estudiante.asignacion.all()
+
+    asignaciones = []
+    for asignacion in asginaciones:
+        tareas = Tareas.objects.filter(asignacion=asignacion)
+        tarea_serializer = TareaSerializer(tareas, many=True)
+        data = {
+            'asignacion': asignacion.curso.nombre,
+            'tareas': tarea_serializer.data
+        }
+        asignaciones.append(data)
+    
+    //asignaciones
+    
+        return Response(asignaciones, status=status.HTTP_200_OK)
+
+    -------------------------------------------------------------------------
+    estudiante = request.user.profile.estudiante
+    queryset = estudiante.asignacion.prefetch_related(
+        'tarea_asignacion'
+    ).annotate(
+        total=Sum('tarea_asignacion__punteo')
+    )
+
+    asignaciones = []
+    for asignacion in queryset:
+        subconsulta = asignacion.tarea_asignacion.filter(activo=True)
+        serializer = TareaSerializer(subconsulta, many=True)
+        datos={
+            'asignacion': asignacion.curso.nombre,
+            'acumulado': asignacion.total,
+            'tareas': serializer.data
+        }
+        asginaciones.append(datos)
+
+    return Response(asignaciones, status=status.HTTP_200_OK)
+
+    1. {
+        'asignacion': 'matemáticas',
+        'acumulado': 25
+        'tareas': [
+            {'nombre': 'Tarea 1' , punteo: 15},
+            {'nombre': 'Tarea 2' , punteo: 0},
+            {'nombre': 'Tarea 3' , punteo: 10}
+        ]
+    }
+
+    2. {
+        'asignacion': 'Dibujo Técnico',
+        'acumulado': 30
+        'tareas': [
+            {'nombre': 'Tarea 1' , punteo: 7},
+            {'nombre': 'Tarea 2' , punteo: 9},
+            {'nombre': 'Tarea 3' , punteo: 14}
+        ]
+    }
+
+
+    ---------------------------------------------------
+
+
+    class CatedraticoSerializer(serializer.ModelSerializer):
+        class Meta:
+            model: Catedratico
+            fields='__all__'
+
+    class AsignacionSerializer(serializer.ModelSerializer):
+        catedratico = CatedraticoSerializer(many=True)
+        class Meta:
+            model: Asignacion
+            fields='__all__'
+            depth=1
+
+    
+    queryset = Asignacion.objects.all()
+    serializer = AsignacionSerializer(queryset, many=True)
+
+    1. {
+        'curso': '...',
+        'grado': '...',
+        'seccion': '...',
+        'catedratico': [
+            {'nombre': '...' , apellido: '...'},
+            {'nombre': '...' , apellido: '...'},
+            {'nombre': '...' , apellido: '...'}
+        ]
+    }
+
+    //Obtener todas las tareas pendientes de calificar por curso.
+    catedratico = request.user.profile.catedratico
+
+    queryset = catedratico.asignacion_catedratico.prefetch_related(
+        'tarea_asignacion'
+    ).annotate(
+        total_tareas=Count('tarea_asignacion'),
+        total_pendientes=Count(
+            'tarea_asignacion__estudiantetarea_tarea', 
+            filter=(
+                Q(tarea_asignacion__estudiantetarea_tarea__calificacion=None)
+            )
+        )
+    )
+
+    asignaciones = []
+    for asignacion in queryset:
+        subconsulta = asignacion.tarea_asignacion.filter(activo=True)
+        serializer = TareaSerializer(subconsulta, many=True)
+        datos={
+            'asignacion': asignacion.curso.nombre,
+            'total_tareas': asignacion.total_tareas,
+            'total_pendientes': asignacion.total_pendientes
+            'tareas': serializer.data
+        }
+        asginaciones.append(datos)    
+
+
+    //Total de tareas pendientes de calificar de un catedratico
+
+    queryset = catedratico.asignacion_catedratico.aggregate(
+        total_pendientes = Count(
+            'tarea_asignacion__estudiantetarea_tarea__id',
+            filter=(
+                tarea_asignacion__estudiantetarea_tarea__calificacion=None
+            )
+        )        
+    )
+
+    {'total_pendientes': 35}
+

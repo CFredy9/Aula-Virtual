@@ -62,13 +62,13 @@ export const createReducer = (storeId, endpoint, formName=undefined, resourceLis
         const params = { page };
         params.ordering = resource.ordering;
         params.search = resource.search;
-        dispatch(setLoader(true));
+        //dispatch(setLoader(true));
         api.get(endpoint, params).then((response) => {
             dispatch(setData(response));
             dispatch(setPage(page));
         }).catch(() => {
         }).finally(() => {
-            dispatch(setLoader(false));
+            //dispatch(setLoader(false));
         });
     };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Link} from "react-router-dom";
+import '../../../../../assets/styles/Sidebar.css'
 
 const defaultAvatar = require("assets/img/avatar-placeholder.png");
 
@@ -18,53 +19,39 @@ class Navbar extends Component {
         const { navToggle, logOut, user } = this.props;
 
         return (
-            <nav className="align-items-stretch flex-md-nowrap p-0 navbar navbar-light">
+            <nav className="align-items-stretch flex-md-nowrap p-0 navbar">
                 <div className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
                     <div className="ml-3 input-group input-group-seamless" />
                 </div>
                 <ul className="border-left flex-row navbar-nav">
-                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                        <DropdownToggle color="light" caret className="nav-item-dropdown border-0">
+                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}> 
+                        <DropdownToggle  caret className="nav-item-dropdown border-0">
                             <img className="user-avatar rounded-circle mr-3"
                                  src={(user.profile && user.profile.avatar) ? user.profile.avatar : defaultAvatar}
                                  alt="User Avatar" />
-                            <span className="d-none d-md-inline-block">{user.first_name}</span>
+                            <span className="d-none d-md-inline-block">{user.first_name} {user.last_name}</span>
                         </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>Header</DropdownItem>
+                        <DropdownMenu >
+                            <DropdownItem header>Opciones</DropdownItem>
                             <DropdownItem>
                                 <Link tabIndex="0"
                                    to="/user-profile">
                                     <i className="material-icons"></i>
-                                    Profile
+                                    Editar Perfil
                                 </Link>
                             </DropdownItem>
                             <DropdownItem>
                                 <Link tabIndex="0"
-                                   to="/edit-user-profile">
+                                   to={`/contraseña/${user.profile.id}`}>
                                     <i className="material-icons"></i>
-                                    Edit Profile
-                                </Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link tabIndex="0"
-                                   to="/file-manager-list">
-                                    <i className="material-icons"></i>
-                                    Files
-                                </Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link tabIndex="0"
-                                   to="/transaction-history">
-                                    <i className="material-icons"></i>
-                                    Transactions
+                                    Editar Contraseña
                                 </Link>
                             </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>
                                 <a tabIndex="0" className="text-danger" onClick={logOut} href="/">
                                     <i className="material-icons text-danger"></i>
-                                    Logout
+                                    Cerrar Sesión
                                 </a>
                             </DropdownItem>
                         </DropdownMenu>

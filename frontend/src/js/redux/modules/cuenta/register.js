@@ -3,8 +3,8 @@ import { push } from "react-router-redux";
 import { NotificationManager } from "react-notifications";
 import { api } from "api";
 
-const SUBMIT = 'REGISTER_SUBMIT';
-const LOADER = 'REGISTER_LOADER';
+const SUBMIT = 'REGISTER_SUBMITS';
+const LOADER = 'REGISTER_LOADERS';
 
 export const constants = {
     SUBMIT,

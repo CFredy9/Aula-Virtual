@@ -81,6 +81,12 @@ export default class Grids extends Component {
                                     >
                                         Apellidos
                                     </TableHeaderColumn>
+                                    <TableHeaderColumn
+                                        dataField="email"
+                                        dataSort
+                                    >
+                                        Correo Electronico
+                                    </TableHeaderColumn>
                                 </Grid>
                             </div>
                         </div>
@@ -164,6 +170,12 @@ export default class Grids extends Component {
                                         dataSort
                                     >
                                         Apellidos
+                                    </TableHeaderColumn>
+                                    <TableHeaderColumn
+                                        dataField="email"
+                                        dataSort
+                                    >
+                                        Correo Electronico
                                     </TableHeaderColumn>
                                     <TableHeaderColumn
                                         dataField="id"
